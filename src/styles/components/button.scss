@@ -1,0 +1,79 @@
+@import '../variables.scss';
+
+button {
+    border: none;
+    border-radius: 2px;
+    font-size: 16px;
+    outline: none;
+
+    &:disabled {
+        cursor: not-allowed;
+    }
+
+}
+
+.button-primary,
+.button-primary-outline,
+.button-danger {
+    padding: 12px 20px;
+    margin: 5px;
+}
+
+.button-primary {
+    background-color: $primary;
+    border: none;
+    color: white;
+
+    &:hover {
+        background-color: $primary-light;
+    }
+
+    &:active {
+        background-color: $primary-dark;
+    }
+
+    &:disabled {
+        background-color: $gray;
+        color: $gray-dark;
+    }
+
+
+}
+
+.button-primary-outline {
+    background-color: transparent;
+    border: 1px solid $primary;
+    color: $primary;
+
+    &:hover {
+        border: 1px solid $primary-light;
+    }
+
+    &:active {
+        border: 1px solid $primary-dark;
+    }
+
+    &:disabled {
+        border: 1px solid $gray-dark;
+        color: $gray-dark;
+    }
+}
+
+.button-danger {
+    background-color: $danger;
+    border: none;
+  
+    &:hover {
+      background-color: $danger-light;
+    }
+  
+    &:active {
+      background-color: $danger-dark;
+    }
+  
+    &:disabled {
+      background-color: $gray;
+      color: $gray-dark;
+    }
+  
+  }
