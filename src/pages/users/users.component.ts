@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CustomTableComponent } from '../../shared/components/custom-table/custom-table.component';
 import { TableDTO } from '../../shared/models/row-table.model';
 import { Router } from '@angular/router';
+import { ModalService } from '../../app/services/utils/modal.service';
 
 @Component({
   selector: 'app-users',
@@ -13,7 +14,8 @@ import { Router } from '@angular/router';
 export class UsersComponent {
 
   constructor(
-    private router: Router
+    private router: Router,
+    private modalService: ModalService
   ) { }
 
   tableHeaders: string[] = ["Nome", "Nível", ""];
@@ -33,7 +35,7 @@ export class UsersComponent {
   ];
 
   edit() {
-    this.router.navigateByUrl("users/form");
+    this.modalService.openDialogUserForm("");
   }
 
   goToTask() {
