@@ -1,0 +1,6 @@
+<section *ngFor="let btn of buttons">
+    <button  mat-menu-item [ngClass]="btn.class" (click)="btn.action()">
+        <mat-icon>{{btn.icon}}</mat-icon>
+        <span>{{btn.text}}</span>
+    </button>
+</section>
