@@ -2,12 +2,12 @@ import { FormGroup, Validators, FormControl, AbstractControl, ValidatorFn } from
 
 export class CreateUserForm {
     name: string = '';
-    levelId: number = 0;
+    level: number = 0;
 
     static buildForm(form: CreateUserForm): FormGroup {
         return new FormGroup({
             name: new FormControl(form.name, [Validators.required, Validators.minLength(4)]),
-            levelId: new FormControl(form.levelId, [Validators.required, levelIdValidator() ]),
+            level: new FormControl(form.level, [Validators.required, levelIdValidator() ]),
         });
     }
 }

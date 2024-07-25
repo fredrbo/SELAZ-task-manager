@@ -4,52 +4,87 @@ import { TableDTO } from '../../shared/models/row-table.model';
 import { Router } from '@angular/router';
 import { ModalService } from '../../app/services/utils/modal.service';
 import { ModalConfirmDelete } from '../../shared/models/modal-confirm-delete.model';
+import { UsersService } from '../../app/services/api/users/users.service';
+import { SharedModule } from '../../shared/shared.module';
+import { UserDTO } from './form-user/model/user.model';
 
 @Component({
   selector: 'app-users',
   standalone: true,
   templateUrl: './users.component.html',
   styleUrl: './users.component.scss',
-  imports: [CustomTableComponent]
+  imports: [CustomTableComponent, SharedModule]
 })
 export class UsersComponent {
 
+  tableHeaders: string[] = ["Nome", "Nível", ""];
+  tableContent: TableDTO[] = [];
+
   constructor(
     private router: Router,
-    private modalService: ModalService
+    private modalService: ModalService,
+    private usersService: UsersService
   ) { }
 
-  tableHeaders: string[] = ["Nome", "Nível", ""];
-  tableContent: TableDTO[] = [{
-    row: [
-      { type: "txt", content: "Fred" },
-      { type: "txt", content: "Admin" },
-      {
-        type: "menu", content: [
-          { text: "Ver Tarefas", class: 'view', action: () => this.goToTask(), icon: "task" },
-          { text: "Editar", class: 'edit', action: () => this.edit(), icon: "edit" },
-          { text: "Deletar", class: 'delete', action: () => this.delete(), icon: "delete" },
-        ]
-      },
-    ]
-  },
-  ];
-
-  edit() {
-    this.modalService.openDialogUserForm("");
+  ngOnInit() {
+    this.getUsers();
   }
 
-  goToTask() {
-    this.router.navigateByUrl("tasks");
+  getUsers() {
+    this.usersService.getAllUser().subscribe(res => {
+      if (res) {
+        this.populateTable(res);
+      }
+    });
   }
 
-  delete() {
+  populateTable(users: UserDTO[]) {
+    this.tableContent = users.map(user => ({
+      row: [
+        { type: "txt", content: user.name },
+        { type: "txt", content: user.level.toString() },
+        {
+          type: "menu",
+          content: [
+            { text: "Ver Tarefas", class: 'view', action: () => this.goToTask(user), icon: "task" },
+            { text: "Editar", class: 'edit', action: () => this.edit(user), icon: "edit" },
+            { text: "Deletar", class: 'delete', action: () => this.delete(user), icon: "delete" }
+          ]
+        }
+      ]
+    }));
+  }
+
+  create = () => {
+    this.modalService.openDialogUserForm();
+  }
+
+  edit(user: UserDTO) {
+    this.modalService.openDialogUserForm(user);
+  }
+
+  goToTask(user: UserDTO) {
+    this.router.navigate(["tasks", { id: user.idDoc }]);
+  }
+
+  delete(user: UserDTO) {
     const data: ModalConfirmDelete = {
-      descriptions: [`Tem certeza que deseja deletar usuário USERNAME`, "<b>IMPORTANTE</b>: Ao deletar usuário será deletado também qualquer tarefa relacionada a ele "],
+      descriptions: [`Tem certeza que deseja deletar usuário ${user.name}`,
+        "<b>IMPORTANTE</b>: Ao deletar usuário será deletado também qualquer tarefa relacionada a ele "],
       title: "Deletar usuário?"
     }
 
-    this.modalService.openDialogConfirmDelete(data);
+    const dialogRef = this.modalService.openDialogConfirmDelete(data);
+
+    dialogRef.afterClosed().subscribe(res => {
+      if (res) {
+        this.deleteUser(user);
+      }
+    })
+  }
+
+  deleteUser(user: UserDTO) {
+    this.usersService.delete(user.idDoc!);
   }
 
 }

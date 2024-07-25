@@ -14,16 +14,12 @@ import { menuButtonDTO } from '../../models/menu-button.model';
   styleUrl: './custom-table.component.scss'
 })
 export class CustomTableComponent {
-  @Input()
-  headers: string[] = [];
-
-
-  @Input()
-  table: TableDTO[] = [];
-
+  @Input() headers: string[] = [];
+  @Input() table: TableDTO[] = [];
   @Input() title: string = '';
+  
   @Input() buttonLabel: string = 'Criar usuário';
-
+  @Input() buttonAction: () => void = () => { };
 
   getConvertedContent(content: any): menuButtonDTO[] {
     if (Array.isArray(content)) {

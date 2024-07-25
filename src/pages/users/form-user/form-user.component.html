@@ -1,6 +1,6 @@
 <div class="container-fluid">
     <div>
-        <h3>Criar usuário</h3>
+        <h3>{{data ? "Editar usuário" : "Criar usuário"}}</h3>
 
         <form [formGroup]="userForm" (ngSubmit)="onSubmit()"
             class=" d-flex flex-column align-items-center justify-content-center">
@@ -11,7 +11,7 @@
 
             <mat-form-field appearance="fill">
                 <mat-label>Nível</mat-label>
-                <mat-select formControlName="levelId">
+                <mat-select formControlName="level">
                     <mat-option *ngFor="let option of userLevelOption" [value]="option.id">{{option.name}}</mat-option>
                 </mat-select>
             </mat-form-field>

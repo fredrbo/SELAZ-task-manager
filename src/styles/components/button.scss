@@ -61,6 +61,7 @@ button {
 .button-danger {
     background-color: $danger;
     border: none;
+    color: white;
   
     &:hover {
       background-color: $danger-light;
