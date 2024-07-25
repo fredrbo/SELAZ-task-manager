@@ -3,6 +3,7 @@ import { CustomTableComponent } from '../../shared/components/custom-table/custo
 import { TableDTO } from '../../shared/models/row-table.model';
 import { Router } from '@angular/router';
 import { ModalService } from '../../app/services/utils/modal.service';
+import { ModalConfirmDelete } from '../../shared/models/modal-confirm-delete.model';
 
 @Component({
   selector: 'app-users',
@@ -27,7 +28,7 @@ export class UsersComponent {
         type: "menu", content: [
           { text: "Ver Tarefas", class: 'view', action: () => this.goToTask(), icon: "task" },
           { text: "Editar", class: 'edit', action: () => this.edit(), icon: "edit" },
-          { text: "Deletar", class: 'delete', action: this.edit, icon: "delete" },
+          { text: "Deletar", class: 'delete', action: () => this.delete(), icon: "delete" },
         ]
       },
     ]
@@ -42,5 +43,13 @@ export class UsersComponent {
     this.router.navigateByUrl("tasks");
   }
 
+  delete() {
+    const data: ModalConfirmDelete = {
+      descriptions: [`Tem certeza que deseja deletar usuário USERNAME`, "<b>IMPORTANTE</b>: Ao deletar usuário será deletado também qualquer tarefa relacionada a ele "],
+      title: "Deletar usuário?"
+    }
+
+    this.modalService.openDialogConfirmDelete(data);
+  }
 
 }

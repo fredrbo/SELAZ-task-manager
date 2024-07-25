@@ -1,0 +1,26 @@
+.dialog {
+
+    .title {
+      font-size: 32px;
+      font-weight: 700;
+      line-height: 30px;
+    }
+  
+    .sub-title {
+      font-size: 24px;
+      font-weight: 700;
+      line-height: 24px;
+    }
+  
+    .close {
+      padding: 9px 11px 4px 11px;
+      
+      &:hover {
+        background-color: $gray-dark;
+        border-radius: 50%;
+      }
+  
+    }
+  
+  }
+  

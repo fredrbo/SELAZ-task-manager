@@ -1,0 +1,19 @@
+<div class="dialog mx-3">
+    <div class="d-flex justify-content-between my-4 align-items-center">
+        <span class="title">{{data.title}}</span>
+        <div  class="close" (click)="close(false)"><mat-icon>close</mat-icon></div>
+    </div>
+
+    <div class="description mb-3" *ngFor="let description of data.descriptions">
+        <span [innerHTML]="description"> </span>
+    </div>
+
+
+    <div class="border-top my-3"></div>
+
+    <div class="d-flex justify-content-end mb-2">
+        <button class="button-primary-outline mx-3" (click)="close(false)">Cancelar</button>
+        <button class='button-danger' (click)="close(true)">Confirmar</button>
+    </div>
+
+</div>

@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { TableDTO } from '../../shared/models/row-table.model';
 import { CustomTableComponent } from '../../shared/components/custom-table/custom-table.component';
 import { Router } from '@angular/router';
+import { ModalConfirmDelete } from '../../shared/models/modal-confirm-delete.model';
+import { ModalService } from '../../app/services/utils/modal.service';
 
 @Component({
   selector: 'app-tasks',
@@ -13,7 +15,8 @@ import { Router } from '@angular/router';
 export class TasksComponent {
 
   constructor(
-    private router: Router
+    private router: Router,
+    private modalService: ModalService
   ) { }
 
   tableHeaders: string[] = ["Título", "Descrição", "Data de criação", "Data de vencimento", "Status", "Usuário", ""];
@@ -29,7 +32,7 @@ export class TasksComponent {
         type: "menu", content: [
           { text: "Ver Tarefa", class: 'view', action: this.edit, icon: "task" },
           { text: "Editar", class: 'edit', action: () => this.edit(), icon: "edit" },
-          { text: "Deletar", class: 'delete', action: this.edit, icon: "delete" },
+          { text: "Deletar", class: 'delete', action:  () => this.delete(), icon: "delete" },
         ]
       },
     ]
@@ -37,6 +40,15 @@ export class TasksComponent {
   ];
 
   edit() {
+  }
+
+  delete() {
+    const data: ModalConfirmDelete = {
+      descriptions: [`Tem certeza que deseja tarefa?`],
+      title: "Deletar Tarefa?"
+    }
+
+    this.modalService.openDialogConfirmDelete(data);
   }
 
 }
