@@ -23,7 +23,7 @@ export class UsersComponent {
       { type: "txt", content: "Admin" },
       {
         type: "menu", content: [
-          { text: "Ver Tarefas", class: 'view', action: this.edit, icon: "task" },
+          { text: "Ver Tarefas", class: 'view', action: () => this.goToTask(), icon: "task" },
           { text: "Editar", class: 'edit', action: () => this.edit(), icon: "edit" },
           { text: "Deletar", class: 'delete', action: this.edit, icon: "delete" },
         ]
@@ -34,6 +34,10 @@ export class UsersComponent {
 
   edit() {
     this.router.navigateByUrl("users/form");
+  }
+
+  goToTask() {
+    this.router.navigateByUrl("tasks");
   }
 
 
