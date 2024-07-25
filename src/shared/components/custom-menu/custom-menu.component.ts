@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { menuButtonDTO } from '../../models/MenuButtonModel';
+import { menuButtonDTO } from '../../models/menu-button.model';
 import { SharedModule } from '../../shared.module';
 
 @Component({

@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { SharedModule } from '../../shared.module';
-import { TableDTO } from '../../models/RowTableModel';
+import { TableDTO } from '../../models/row-table.model';
 import { CustomMenuComponent } from '../custom-menu/custom-menu.component';
-import { menuButtonDTO } from '../../models/MenuButtonModel';
+import { menuButtonDTO } from '../../models/menu-button.model';
 
 
 @Component({

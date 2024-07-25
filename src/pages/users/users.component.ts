@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CustomTableComponent } from '../../shared/components/custom-table/custom-table.component';
-import { TableDTO } from '../../shared/models/RowTableModel';
+import { TableDTO } from '../../shared/models/row-table.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-users',
@@ -11,21 +12,29 @@ import { TableDTO } from '../../shared/models/RowTableModel';
 })
 export class UsersComponent {
 
+  constructor(
+    private router: Router
+  ) { }
+
   tableHeaders: string[] = ["Nome", "Nível", ""];
   tableContent: TableDTO[] = [{
     row: [
       { type: "txt", content: "Fred" },
       { type: "txt", content: "Admin" },
-      { type: "menu", content: [
-        { text: "Editar", class: 'edit', action: this.edit, icon: "edit" },
-        { text: "Tarefas", class: 'view', action: this.edit, icon: "task" },
-        { text: "Deletar", class: 'delete', action: this.edit, icon: "delete" },
-      ] },
+      {
+        type: "menu", content: [
+          { text: "Ver Tarefas", class: 'view', action: this.edit, icon: "task" },
+          { text: "Editar", class: 'edit', action: () => this.edit(), icon: "edit" },
+          { text: "Deletar", class: 'delete', action: this.edit, icon: "delete" },
+        ]
+      },
     ]
   },
   ];
 
   edit() {
-
+    this.router.navigateByUrl("users/form");
   }
+
+
 }

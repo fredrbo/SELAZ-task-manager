@@ -1,4 +1,4 @@
-import { menuButtonDTO } from "./MenuButtonModel";
+import { menuButtonDTO } from "./menu-button.model";
 
 type ActionHandler = () => void;
 
