@@ -6,7 +6,7 @@ import { ModalConfirmDelete } from '../../shared/models/modal-confirm-delete.mod
 import { ModalService } from '../../app/services/utils/modal.service';
 import { TaskDTO } from './form-tasks/models/task.model';
 import { TaskService } from '../../app/services/api/task/task.service';
-import { getTaskStatusText } from './form-tasks/models/status-task.model';
+import { getTaskStatusText } from './form-tasks/models/status-task.enum';
 import { TimeService } from '../../app/services/utils/time/time.service';
 
 @Component({

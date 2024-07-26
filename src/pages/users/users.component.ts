@@ -7,6 +7,7 @@ import { ModalConfirmDelete } from '../../shared/models/modal-confirm-delete.mod
 import { UsersService } from '../../app/services/api/users/users.service';
 import { SharedModule } from '../../shared/shared.module';
 import { UserDTO } from './form-user/model/user.model';
+import { getUserLevelText } from './form-user/model/user-level.enum';
 
 @Component({
   selector: 'app-users',
@@ -42,7 +43,7 @@ export class UsersComponent {
     this.tableContent = users.map(user => ({
       id: user.idDoc!, row: [
         { type: "txt", content: user.name },
-        { type: "txt", content: user.level.toString() },
+        { type: "txt", content: getUserLevelText(user.level) },
         {
           type: "menu",
           content: [
@@ -59,7 +60,7 @@ export class UsersComponent {
     this.modalService.openDialogUserForm();
   }
 
-  edit(user: UserDTO){
+  edit(user: UserDTO) {
     this.modalService.openDialogUserForm(user);
   }
 

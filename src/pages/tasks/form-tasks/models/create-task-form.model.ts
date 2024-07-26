@@ -1,12 +1,12 @@
 import { FormGroup, Validators, FormControl, AbstractControl, ValidatorFn } from '@angular/forms';
-import { TaskStatus } from './status-task.model';
+import { TaskStatusEnum } from './status-task.enum';
 
 export class CreateTaskForm {
     title: string = '';
     description: string = "";
     creationDate: Date = new Date();
     expirationDate: Date = new Date();
-    status: TaskStatus = 0;
+    status: TaskStatusEnum = 0;
     userId: string = "";
 
     static buildForm(form: CreateTaskForm): FormGroup {

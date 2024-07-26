@@ -1,8 +1,8 @@
 import { OptionSelect } from "../../../../shared/models/option-select.model";
-import { TaskStatus } from "./status-task.model";
+import { TaskStatusEnum } from "./status-task.enum";
 
 export const TASK_STATUS: OptionSelect[] = [
-    { id: TaskStatus.Pending, name: "Pendente" },
-    { id: TaskStatus.InProgress, name: "Em progresso" },
-    { id: TaskStatus.Completed, name: "Completo" },
+    { id: TaskStatusEnum.Pending, name: "Pendente" },
+    { id: TaskStatusEnum.InProgress, name: "Em progresso" },
+    { id: TaskStatusEnum.Completed, name: "Completo" },
 ]

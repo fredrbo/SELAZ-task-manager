@@ -1,6 +1,7 @@
 import { OptionSelect } from "../../../../shared/models/option-select.model";
+import { UserLevelEnum } from "./user-level.enum";
 
 export const USER_LEVEL: OptionSelect[] = [
-    { id: 1, name: "Administrador" },
-    { id: 2, name: "Usuário" },
+    { id: UserLevelEnum.Admin, name: "Administrador" },
+    { id: UserLevelEnum.User, name: "Usuário" },
 ]
