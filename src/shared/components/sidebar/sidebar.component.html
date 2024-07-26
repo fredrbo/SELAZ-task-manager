@@ -1,0 +1,27 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #sidenav mode="side" [(opened)]="opened">
+    <mat-nav-list>
+      <mat-list-item routerLink="/users" routerLinkActive="active-link">
+        <span>Usuários</span>
+      </mat-list-item>
+      <mat-list-item routerLink="/tasks" routerLinkActive="active-link">
+        <span>Tarefas</span>
+      </mat-list-item>
+    </mat-nav-list>
+
+
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button mat-icon-button (click)="sidenav.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span>SELAZ Task Manager</span>
+    </mat-toolbar>
+
+    <div class="content">
+      <ng-content></ng-content>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
