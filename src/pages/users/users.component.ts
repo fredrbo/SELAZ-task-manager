@@ -40,7 +40,7 @@ export class UsersComponent {
 
   populateTable(users: UserDTO[]) {
     this.tableContent = users.map(user => ({
-      row: [
+      id: user.idDoc!, row: [
         { type: "txt", content: user.name },
         { type: "txt", content: user.level.toString() },
         {
@@ -48,7 +48,7 @@ export class UsersComponent {
           content: [
             { text: "Ver Tarefas", class: 'view', action: () => this.goToTask(user), icon: "task" },
             { text: "Editar", class: 'edit', action: () => this.edit(user), icon: "edit" },
-            { text: "Deletar", class: 'delete', action: () => this.delete(user), icon: "delete" }
+            { text: "Deletar", class: 'delete', action: () => this.openModalDelete(user), icon: "delete" }
           ]
         }
       ]
@@ -59,7 +59,7 @@ export class UsersComponent {
     this.modalService.openDialogUserForm();
   }
 
-  edit(user: UserDTO) {
+  edit(user: UserDTO){
     this.modalService.openDialogUserForm(user);
   }
 
@@ -67,7 +67,7 @@ export class UsersComponent {
     this.router.navigate(["tasks", { id: user.idDoc }]);
   }
 
-  delete(user: UserDTO) {
+  openModalDelete(user: UserDTO) {
     const data: ModalConfirmDelete = {
       descriptions: [`Tem certeza que deseja deletar usuário ${user.name}`,
         "<b>IMPORTANTE</b>: Ao deletar usuário será deletado também qualquer tarefa relacionada a ele "],

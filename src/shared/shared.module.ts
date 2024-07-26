@@ -5,13 +5,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
-import { AngularFireModule } from '@angular/fire/compat';
-import { environment } from "../environments/environment";
-import { AngularFirestoreModule } from "@angular/fire/compat/firestore";
-import { provideFirebaseApp } from "@angular/fire/app";
-import { initializeApp } from "firebase/app";
-import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
 
 const ModulesImportExportAngular: any[] = [
     CommonModule,
@@ -22,28 +18,20 @@ const ModulesImportExportAngular: any[] = [
     MatInputModule,
     FormsModule,
     ReactiveFormsModule,
-];
-const ComponentsDeclarationExport: any[] = [
-    
-];
+    MatDatepickerModule,
+    MatNativeDateModule,
+]
 
 @NgModule({
     imports: [
-        // AngularFirestoreModule,
-        // AngularFireModule.initializeApp(environment.firebaseConfig),
         ...ModulesImportExportAngular,
-    ],
-    declarations: [
-        ...ComponentsDeclarationExport
     ],
     exports: [
         ...ModulesImportExportAngular,
-        ...ComponentsDeclarationExport,
     ],
     providers: [
-        // provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
-        // provideFirestore(() => getFirestore()),
-    ]
+    ],
+
 
 })
 export class SharedModule { }

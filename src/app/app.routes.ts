@@ -7,10 +7,6 @@ export const routes: Routes = [
         loadComponent: () => import('../pages/users/users.component').then(m => m.UsersComponent)
     },
     {
-        path: 'users/form',
-        loadComponent: () => import('../pages/users/form-user/form-user.component').then(m => m.FormUserComponent)
-    },
-    {
         path: 'tasks',
         loadComponent: () => import('../pages/tasks/tasks.component').then(m => m.TasksComponent)
     },

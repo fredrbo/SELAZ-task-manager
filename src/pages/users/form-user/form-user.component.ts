@@ -55,8 +55,9 @@ export class FormUserComponent {
   createUser(user: UserDTO) {
     this.usersService.createUser(user);
   }
-
+  
   editUser(user: UserDTO) {
+    user.idDoc = this.data.idDoc;
     this.usersService.updateUser(user);
   };
 

@@ -4,6 +4,8 @@ import { FormUserComponent } from '../../../pages/users/form-user/form-user.comp
 import { ModalConfirmDelete } from '../../../shared/models/modal-confirm-delete.model';
 import { ModalConfirmDeleteComponent } from '../../../shared/components/modal/modal-confirm-delete/modal-confirm-delete.component';
 import { UserDTO } from '../../../pages/users/form-user/model/user.model';
+import { TaskDTO } from '../../../pages/tasks/form-tasks/models/task.model';
+import { FormTasksComponent } from '../../../pages/tasks/form-tasks/form-tasks.component';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +19,14 @@ export class ModalService {
 
   openDialogUserForm(data?: UserDTO): MatDialogRef<FormUserComponent> {
     return this.dialog.open(FormUserComponent, {
+      width: this.width,
+      maxHeight: this.maxHeight,
+      data: data,
+    });
+  }
+
+  openDialogTaskForm(data?: TaskDTO): MatDialogRef<FormTasksComponent> {
+    return this.dialog.open(FormTasksComponent, {
       width: this.width,
       maxHeight: this.maxHeight,
       data: data,
