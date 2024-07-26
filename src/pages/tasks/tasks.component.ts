@@ -23,6 +23,8 @@ export class TasksComponent {
   tableHeaders: string[] = ["Título", "Descrição", "Data de criação", "Data de vencimento", "Status", "Usuário", ""];
   tableContent: TableDTO[] = [];
   filter: FilterTaks = new FilterTaks();
+  isAscendingOrder: boolean = true;
+  tasks: TaskDTO[] = [];
 
   constructor(
     private router: Router,
@@ -45,6 +47,7 @@ export class TasksComponent {
   }
 
   populateTable(tasks: TaskDTO[]) {
+    this.tasks = tasks;
     this.tableContent = tasks.map(task => ({
       row: [
         { type: "txt", content: task.title },
@@ -63,6 +66,23 @@ export class TasksComponent {
       ]
     }));
   }
+
+  orderTaskByExpirationDate = () => {
+    this.tasks = this.tasks.sort((a, b) => {
+      const dateA = new Date(this.timeService.convertTimestampToDate(a.expirationDate));
+      const dateB = new Date(this.timeService.convertTimestampToDate(b.expirationDate));
+
+      // Compare as datas e retorne a ordem com base no valor de isAscendingOrder
+      if (this.isAscendingOrder) {
+        return dateA.getTime() - dateB.getTime();
+      } else {
+        return dateB.getTime() - dateA.getTime();
+      }
+    });
+    this.isAscendingOrder = !this.isAscendingOrder;
+    this.populateTable(this.tasks)
+  }
+
 
   create = () => {
     this.modalService.openDialogTaskForm();

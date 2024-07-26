@@ -5,7 +5,6 @@ import { TableDTO } from '../../models/row-table.model';
 import { CustomMenuComponent } from '../custom-menu/custom-menu.component';
 import { menuButtonDTO } from '../../models/menu-button.model';
 import { FilterComponent } from '../filter/filter.component';
-import { ModalService } from '../../../app/services/utils/modal.service';
 
 
 @Component({
@@ -23,10 +22,20 @@ export class CustomTableComponent {
   @Input() buttonLabel: string = 'Criar usuário';
   @Input() buttonAction: () => void = () => { };
   @Input() buttonFilter: () => void = () => { };
+  @Input() buttonOrder: () => void = () => { };
+
+  @Input() showButtonFilter: boolean = false;
+  @Input() showButtonOrder: boolean = false;
+
+  isAscendingOrder = true;
 
   constructor(
-    private modalService: ModalService
   ) { }
+
+  toggleSort() {
+    this.isAscendingOrder = !this.isAscendingOrder;
+    this.buttonOrder();
+  }
 
   getConvertedContent(content: any): menuButtonDTO[] {
     if (Array.isArray(content)) {

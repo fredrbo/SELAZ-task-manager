@@ -3,8 +3,11 @@
         <h3 class="mt-2">{{ title }}</h3>
         <div class="d-flex align-items-center">
             <button class="button-primary" (click)="buttonAction()">{{ buttonLabel }}</button>
-            <button mat-icon-button (click)="buttonFilter()">
+            <button *ngIf="showButtonFilter" mat-icon-button (click)="buttonFilter()">
                 <mat-icon>filter_list</mat-icon>
+            </button>
+            <button *ngIf="showButtonOrder" mat-icon-button (click)="toggleSort()" matTooltip="Ordenar por data de vencimento">
+                <mat-icon>{{ !isAscendingOrder ? 'arrow_upward' : 'arrow_downward' }}</mat-icon>
             </button>
         </div>
     </div>
@@ -20,7 +23,6 @@
                 <tr *ngFor="let content of table">
                     <td *ngFor="let row of content.row">
                         <div [ngSwitch]="row.type" class="d-flex align-items-center">
-
                             <div *ngSwitchCase="'txt'">
                                 {{ row.content }}
                             </div>
