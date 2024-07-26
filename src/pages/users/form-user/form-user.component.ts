@@ -7,6 +7,7 @@ import { CreateUserForm } from './model/create-user.form';
 import { UsersService } from '../../../app/services/api/users/users.service';
 import { UserDTO } from './model/user.model';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { NotifyService } from '../../../app/services/utils/notify/notify.service';
 
 @Component({
   selector: 'app-form-user',
@@ -23,7 +24,10 @@ export class FormUserComponent {
   constructor(
     private dialogRef: MatDialogRef<FormUserComponent>,
     @Inject(MAT_DIALOG_DATA) public data: UserDTO,
-    private usersService: UsersService) { }
+    private usersService: UsersService,
+    private notifyService: NotifyService
+    
+  ) { }
 
   ngOnInit() {
     this.onInitForm(new CreateUserForm());
@@ -54,11 +58,15 @@ export class FormUserComponent {
 
   createUser(user: UserDTO) {
     this.usersService.createUser(user);
+    this.dialogRef.close(); 
+    this.notifyService.openSnack("Usuário criado com sucesso");   
   }
   
   editUser(user: UserDTO) {
     user.idDoc = this.data.idDoc;
     this.usersService.updateUser(user);
+    this.dialogRef.close();
+    this.notifyService.openSnack("Usuário salvo com sucesso");
   };
 
 }

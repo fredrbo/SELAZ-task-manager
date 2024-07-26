@@ -8,6 +8,7 @@ import { UsersService } from '../../app/services/api/users/users.service';
 import { SharedModule } from '../../shared/shared.module';
 import { UserDTO } from './form-user/model/user.model';
 import { getUserLevelText } from './form-user/model/user-level.enum';
+import { NotifyService } from '../../app/services/utils/notify/notify.service';
 
 @Component({
   selector: 'app-users',
@@ -24,7 +25,8 @@ export class UsersComponent {
   constructor(
     private router: Router,
     private modalService: ModalService,
-    private usersService: UsersService
+    private usersService: UsersService,
+    private notifyService: NotifyService
   ) { }
 
   ngOnInit() {
@@ -80,12 +82,14 @@ export class UsersComponent {
     dialogRef.afterClosed().subscribe(res => {
       if (res) {
         this.deleteUser(user);
+        
       }
     })
   }
 
   deleteUser(user: UserDTO) {
     this.usersService.delete(user.idDoc!);
+    this.notifyService.openSnack("Usuário deletado com sucesso");
   }
 
 }

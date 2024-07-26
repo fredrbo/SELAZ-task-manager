@@ -8,6 +8,7 @@ import { TaskDTO } from './form-tasks/models/task.model';
 import { TaskService } from '../../app/services/api/task/task.service';
 import { getTaskStatusText } from './form-tasks/models/status-task.enum';
 import { TimeService } from '../../app/services/utils/time/time.service';
+import { NotifyService } from '../../app/services/utils/notify/notify.service';
 
 @Component({
   selector: 'app-tasks',
@@ -26,6 +27,7 @@ export class TasksComponent {
     private modalService: ModalService,
     private taskService: TaskService,
     private timeService: TimeService,
+    private notifyService: NotifyService
   ) { }
 
   ngOnInit() {
@@ -74,6 +76,7 @@ export class TasksComponent {
 
   delete(task: TaskDTO) {
     this.taskService.delete(task.idDoc!);
+    this.notifyService.openSnack("Tarefa deletada com sucesso");
   }
 
   openModalDelete(task: TaskDTO) {

@@ -9,6 +9,7 @@ import { TaskDTO } from './models/task.model';
 import { TaskService } from '../../../app/services/api/task/task.service';
 import { TimeService } from '../../../app/services/utils/time/time.service';
 import { TASK_STATUS } from './models/type-status.const';
+import { NotifyService } from '../../../app/services/utils/notify/notify.service';
 
 @Component({
   selector: 'app-form-tasks',
@@ -28,6 +29,7 @@ export class FormTasksComponent {
     @Inject(MAT_DIALOG_DATA) public data: TaskDTO,
     private tasksService: TaskService,
     private timeService: TimeService,
+    private notifyService: NotifyService,
   ) { }
 
   ngOnInit() {
@@ -64,11 +66,17 @@ export class FormTasksComponent {
   createTask(task: TaskDTO) {
     task.creationDate = this.timeService.convertDateToTimestamp(new Date())
     this.tasksService.createTask(task);
+
+    this.dialogRef.close(); 
+    this.notifyService.openSnack("Tarefa criada com sucesso");   
   }
 
   editTask(task: TaskDTO) {
     task.idDoc = this.data.idDoc;
     this.tasksService.updateTask(task);
+
+    this.dialogRef.close(); 
+    this.notifyService.openSnack("Tarefa salva com sucesso");   
   };
 
 }

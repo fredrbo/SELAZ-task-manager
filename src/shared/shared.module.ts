@@ -7,7 +7,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 const ModulesImportExportAngular: any[] = [
     CommonModule,
@@ -20,6 +21,7 @@ const ModulesImportExportAngular: any[] = [
     ReactiveFormsModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatSnackBarModule
 ]
 
 @NgModule({
