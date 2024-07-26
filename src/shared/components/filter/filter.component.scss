@@ -1,0 +1,28 @@
+.modal-content {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .modal-title {
+    padding: 6px;
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .filter-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    padding: 16px;
+  }
+  
+  mat-form-field {
+    width: 100%;
+    max-width: 300px;
+  }
+  
+  mat-dialog-actions {
+    padding: 16px;
+    justify-content: flex-end;
+  }
+  

@@ -14,6 +14,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
 import { RouterModule } from "@angular/router";
+import { MatDialogActions, MatDialogContent, MatDialogTitle } from "@angular/material/dialog";
+
 const ModulesImportExportAngular: any[] = [
     CommonModule,
     MatMenuModule,
@@ -30,7 +32,10 @@ const ModulesImportExportAngular: any[] = [
     MatToolbarModule,
     MatButtonModule,
     MatListModule,
-    RouterModule
+    RouterModule,
+    MatDialogTitle,
+    MatDialogContent,
+    MatDialogActions
 ]
 
 @NgModule({

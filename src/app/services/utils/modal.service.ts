@@ -6,6 +6,7 @@ import { ModalConfirmDeleteComponent } from '../../../shared/components/modal/mo
 import { UserDTO } from '../../../pages/users/form-user/model/user.model';
 import { TaskDTO } from '../../../pages/tasks/form-tasks/models/task.model';
 import { FormTasksComponent } from '../../../pages/tasks/form-tasks/form-tasks.component';
+import { FilterComponent } from '../../../shared/components/filter/filter.component';
 
 @Injectable({
   providedIn: 'root'
@@ -35,6 +36,14 @@ export class ModalService {
 
   openDialogConfirmDelete(data: ModalConfirmDelete): MatDialogRef<ModalConfirmDeleteComponent> {
     return this.dialog.open(ModalConfirmDeleteComponent, {
+      width: this.width,
+      maxHeight: this.maxHeight,
+      data: data
+    });
+  }
+
+  openDialogTaskFilter(data?: ModalConfirmDelete): MatDialogRef<FilterComponent> {
+    return this.dialog.open(FilterComponent, {
       width: this.width,
       maxHeight: this.maxHeight,
       data: data
