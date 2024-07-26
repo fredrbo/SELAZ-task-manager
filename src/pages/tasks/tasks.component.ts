@@ -9,6 +9,7 @@ import { TaskService } from '../../app/services/api/task/task.service';
 import { getTaskStatusText } from './form-tasks/models/status-task.enum';
 import { TimeService } from '../../app/services/utils/time/time.service';
 import { NotifyService } from '../../app/services/utils/notify/notify.service';
+import { FilterTaks } from './form-tasks/models/filter-taks.model';
 
 @Component({
   selector: 'app-tasks',
@@ -21,6 +22,7 @@ export class TasksComponent {
 
   tableHeaders: string[] = ["Título", "Descrição", "Data de criação", "Data de vencimento", "Status", "Usuário", ""];
   tableContent: TableDTO[] = [];
+  filter: FilterTaks = new FilterTaks();
 
   constructor(
     private router: Router,
@@ -50,7 +52,7 @@ export class TasksComponent {
         { type: "txt", content: this.timeService.formatDate(this.timeService.convertTimestampToDate(task.creationDate)) },
         { type: "txt", content: this.timeService.formatDate(this.timeService.convertTimestampToDate(task.expirationDate)) },
         { type: "txt", content: getTaskStatusText(task.status) },
-        { type: "txt", content: task.userId },
+        { type: "txt", content: task.userName },
         {
           type: "menu", content: [
             { text: "Ver Tarefa", class: 'view', action: () => this.view(task), icon: "task" },
@@ -92,6 +94,43 @@ export class TasksComponent {
         this.delete(task);
       }
     })
+  }
+
+  openModalFilter = () => {
+    const dialogRef = this.modalService.openDialogTaskFilter(this.filter);
+
+    dialogRef.afterClosed().subscribe(res => {
+      this.onCloseModalFilter(res);
+    });
+  }
+
+  onCloseModalFilter(res: FilterTaks) {
+    if (res) {
+      this.filterTasks(res);
+    } else {
+      this.filter = new FilterTaks();
+      this.getTasks();
+    }
+  }
+
+  filterTasks(filter: FilterTaks) {
+    //Foi criado uma query para cada condição do filtro.
+    //Não consegui filtrar tudo usando apenas uma.
+    if (filter.status !== undefined && filter.status >= 0 && filter.userId !== "") {
+      this.taskService.getTasksByStatusAndUserId(filter.status, filter.userId).subscribe(res => {
+        this.populateTable(res);
+      });
+    } else if (filter.status !== undefined && filter.status >= 0 && filter.userId === "") {
+      this.taskService.getTasksByStatus(filter.status).subscribe(res => {
+        this.populateTable(res);
+      });
+    } else if (filter.status && filter.status <= 0 && filter.userId !== "") {
+      this.taskService.getTasksByUserId(filter.userId).subscribe(res => {
+        this.populateTable(res);
+      });
+    } else {
+      this.getTasks();
+    }
   }
 
 }

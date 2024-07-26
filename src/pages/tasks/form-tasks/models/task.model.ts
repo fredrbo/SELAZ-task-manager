@@ -9,4 +9,5 @@ export class TaskDTO {
     expirationDate: FirestoreTimestamp = {nanoseconds: 0, seconds: 0};;
     status: TaskStatusEnum = 0;
     userId: string = "";
+    userName: string = "";
 }

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { TaskDTO } from '../../../../pages/tasks/form-tasks/models/task.model';
 import { BaseService } from '../base/base.service';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { AngularFirestore, QueryFn } from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -27,4 +27,22 @@ export class TaskService extends BaseService {
     return this.update(user);
   }
 
+  getTasksByStatusAndUserId(status: number, userId: string): Observable<TaskDTO[]> {
+    const queryFn: QueryFn = ref => ref
+      .where('status', '==', status)
+      .where('userId', '==', userId);
+    return this.getAll<TaskDTO>(queryFn);
+  }
+  
+  getTasksByStatus(status: number): Observable<TaskDTO[]> {
+    const queryFn: QueryFn = ref => ref
+    .where('status', '==', status)
+    return this.getAll<TaskDTO>(queryFn);
+  }
+
+  getTasksByUserId(userId: string): Observable<TaskDTO[]> {
+    const queryFn: QueryFn = ref => ref
+      .where('userId', '==', userId);
+    return this.getAll<TaskDTO>(queryFn);
+  }
 }

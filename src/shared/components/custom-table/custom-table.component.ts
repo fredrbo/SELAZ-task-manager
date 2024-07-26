@@ -22,6 +22,7 @@ export class CustomTableComponent {
 
   @Input() buttonLabel: string = 'Criar usuário';
   @Input() buttonAction: () => void = () => { };
+  @Input() buttonFilter: () => void = () => { };
 
   constructor(
     private modalService: ModalService
@@ -35,8 +36,6 @@ export class CustomTableComponent {
     }
   }
 
-  openModalFilter() {
-    this.modalService.openDialogTaskFilter();
-  }
+
 
 }

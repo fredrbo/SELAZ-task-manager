@@ -1,5 +1,5 @@
 
 export class OptionSelect {
     name: string = "";
-    id: number = 0;
+    id?: number | string = 0;
 }

@@ -49,7 +49,6 @@ export class UsersComponent {
         {
           type: "menu",
           content: [
-            { text: "Ver Tarefas", class: 'view', action: () => this.goToTask(user), icon: "task" },
             { text: "Editar", class: 'edit', action: () => this.edit(user), icon: "edit" },
             { text: "Deletar", class: 'delete', action: () => this.openModalDelete(user), icon: "delete" }
           ]
@@ -66,10 +65,6 @@ export class UsersComponent {
     this.modalService.openDialogUserForm(user);
   }
 
-  goToTask(user: UserDTO) {
-    this.router.navigate(["tasks", { id: user.idDoc }]);
-  }
-
   openModalDelete(user: UserDTO) {
     const data: ModalConfirmDelete = {
       descriptions: [`Tem certeza que deseja deletar usuário ${user.name}`,
@@ -82,7 +77,7 @@ export class UsersComponent {
     dialogRef.afterClosed().subscribe(res => {
       if (res) {
         this.deleteUser(user);
-        
+
       }
     })
   }

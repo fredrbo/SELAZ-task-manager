@@ -10,6 +10,7 @@ import { TaskService } from '../../../app/services/api/task/task.service';
 import { TimeService } from '../../../app/services/utils/time/time.service';
 import { TASK_STATUS } from './models/type-status.const';
 import { NotifyService } from '../../../app/services/utils/notify/notify.service';
+import { UsersService } from '../../../app/services/api/users/users.service';
 
 @Component({
   selector: 'app-form-tasks',
@@ -23,6 +24,7 @@ export class FormTasksComponent {
 
   taskForm!: FormGroup;
   taskStatusOption: OptionSelect[] = TASK_STATUS;
+  usersOptions: OptionSelect[] = [];
 
   constructor(
     private dialogRef: MatDialogRef<FormTasksComponent>,
@@ -30,9 +32,12 @@ export class FormTasksComponent {
     private tasksService: TaskService,
     private timeService: TimeService,
     private notifyService: NotifyService,
+    private userService: UsersService
+
   ) { }
 
   ngOnInit() {
+    this.getUsers();
     this.onInitForm(new CreateTaskForm());
   }
 
@@ -59,24 +64,42 @@ export class FormTasksComponent {
   }
 
   saveTask(task: TaskDTO) {
+    this.findUserName(task);
+    debugger
     if (this.data) this.editTask(task);
     else this.createTask(this.taskForm.value);
+  }
+
+  findUserName(task: TaskDTO) {
+    const user = this.usersOptions.find(user => user.id === task.userId);
+    if (user) task.userName = user.name;
   }
 
   createTask(task: TaskDTO) {
     task.creationDate = this.timeService.convertDateToTimestamp(new Date())
     this.tasksService.createTask(task);
 
-    this.dialogRef.close(); 
-    this.notifyService.openSnack("Tarefa criada com sucesso");   
+    this.dialogRef.close();
+    this.notifyService.openSnack("Tarefa criada com sucesso");
   }
 
   editTask(task: TaskDTO) {
     task.idDoc = this.data.idDoc;
     this.tasksService.updateTask(task);
 
-    this.dialogRef.close(); 
-    this.notifyService.openSnack("Tarefa salva com sucesso");   
+    this.dialogRef.close();
+    this.notifyService.openSnack("Tarefa salva com sucesso");
   };
 
+  getUsers() {
+    this.userService.getAllUser().subscribe(res => {
+      if (res) {
+        this.usersOptions = res.map(user => ({
+          id: user.idDoc,
+          name: user.name
+        }));
+      }
+    });
+
+  }
 }

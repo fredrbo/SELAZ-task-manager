@@ -7,6 +7,7 @@ import { UserDTO } from '../../../pages/users/form-user/model/user.model';
 import { TaskDTO } from '../../../pages/tasks/form-tasks/models/task.model';
 import { FormTasksComponent } from '../../../pages/tasks/form-tasks/form-tasks.component';
 import { FilterComponent } from '../../../shared/components/filter/filter.component';
+import { FilterTaks } from '../../../pages/tasks/form-tasks/models/filter-taks.model';
 
 @Injectable({
   providedIn: 'root'
@@ -42,7 +43,7 @@ export class ModalService {
     });
   }
 
-  openDialogTaskFilter(data?: ModalConfirmDelete): MatDialogRef<FilterComponent> {
+  openDialogTaskFilter(data: FilterTaks): MatDialogRef<FilterComponent> {
     return this.dialog.open(FilterComponent, {
       width: this.width,
       maxHeight: this.maxHeight,
