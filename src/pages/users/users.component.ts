@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { CustomTableComponent } from '../../shared/components/custom-table/custom-table.component';
 import { TableDTO } from '../../shared/models/row-table.model';
-import { Router } from '@angular/router';
 import { ModalService } from '../../app/services/utils/modal.service';
 import { ModalConfirmDelete } from '../../shared/models/modal-confirm-delete.model';
 import { UsersService } from '../../app/services/api/users/users.service';
@@ -23,7 +22,6 @@ export class UsersComponent {
   tableContent: TableDTO[] = [];
 
   constructor(
-    private router: Router,
     private modalService: ModalService,
     private usersService: UsersService,
     private notifyService: NotifyService

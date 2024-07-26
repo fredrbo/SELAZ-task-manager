@@ -1,7 +1,13 @@
+.table-container {
+    max-width: 100%;  
+    overflow-x: auto; 
+    margin: 0 auto; 
+}
+
 .table {
-    margin: 0 auto;
+    width: 100%;     
 }
 
 .table-responsive {
-    overflow-x: auto;
+    overflow-x: auto; 
 }
