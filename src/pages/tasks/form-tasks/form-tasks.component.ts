@@ -53,6 +53,7 @@ export class FormTasksComponent {
       title: task.title,
       description: task.description,
       expirationDate: this.timeService.convertTimestampToDate(task.expirationDate),
+      creationDate: this.timeService.convertTimestampToDate(task.creationDate),
       status: task.status,
       userId: task.userId,
     });
@@ -65,7 +66,6 @@ export class FormTasksComponent {
 
   saveTask(task: TaskDTO) {
     this.findUserName(task);
-    debugger
     if (this.data) this.editTask(task);
     else this.createTask(this.taskForm.value);
   }
@@ -84,6 +84,7 @@ export class FormTasksComponent {
   }
 
   editTask(task: TaskDTO) {
+    debugger
     task.idDoc = this.data.idDoc;
     this.tasksService.updateTask(task);
 

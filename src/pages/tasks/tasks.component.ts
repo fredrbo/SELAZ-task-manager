@@ -58,7 +58,6 @@ export class TasksComponent {
         { type: "txt", content: task.userName },
         {
           type: "menu", content: [
-            { text: "Ver Tarefa", class: 'view', action: () => this.view(task), icon: "task" },
             { text: "Editar", class: 'edit', action: () => this.edit(task), icon: "edit" },
             { text: "Deletar", class: 'delete', action: () => this.openModalDelete(task), icon: "delete" },
           ]
@@ -88,9 +87,6 @@ export class TasksComponent {
     this.modalService.openDialogTaskForm();
   }
 
-  view(task: TaskDTO) {
-    this.modalService.openDialogTaskForm(task);
-  }
 
   edit(task: TaskDTO) {
     this.modalService.openDialogTaskForm(task);

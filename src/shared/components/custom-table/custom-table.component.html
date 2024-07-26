@@ -6,7 +6,8 @@
             <button *ngIf="showButtonFilter" mat-icon-button (click)="buttonFilter()">
                 <mat-icon>filter_list</mat-icon>
             </button>
-            <button *ngIf="showButtonOrder" mat-icon-button (click)="toggleSort()" matTooltip="Ordenar por data de vencimento">
+            <button *ngIf="showButtonOrder" mat-icon-button (click)="toggleSort()"
+                matTooltip="Ordenar por data de vencimento">
                 <mat-icon>{{ !isAscendingOrder ? 'arrow_upward' : 'arrow_downward' }}</mat-icon>
             </button>
         </div>
@@ -23,9 +24,14 @@
                 <tr *ngFor="let content of table">
                     <td *ngFor="let row of content.row">
                         <div [ngSwitch]="row.type" class="d-flex align-items-center">
-                            <div *ngSwitchCase="'txt'">
-                                {{ row.content }}
+                            <div *ngSwitchCase="'txt'" class="text-container" matTooltip="{{ row.content }}"
+                                matTooltipPosition="above">
+                                <div *ngIf="isString(row.content)">
+                                    {{ truncateText(row.content) }}
+                                </div>
+
                             </div>
+
                             <div *ngSwitchCase="'menu'">
                                 <span [matMenuTriggerFor]="menu">
                                     <mat-icon>more_vert</mat-icon>

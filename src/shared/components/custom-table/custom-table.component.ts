@@ -46,5 +46,12 @@ export class CustomTableComponent {
   }
 
 
+  isString(content: any): content is string {
+    return typeof content === 'string';
+  }
 
+  truncateText(text: string, maxLength: number = 16): string {
+    return text.length > maxLength ? text.slice(0, maxLength) + '...' : text;
+  }
+  
 }
